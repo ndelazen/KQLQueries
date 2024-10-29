@@ -1,0 +1,7 @@
+// Check if DMARC is failing
+EmailEvents
+| where TimeGenerated > ago(90d)
+| project Timestamp, EmailDirection, NetworkMessageId, SenderFromAddress, ThreatTypes, DetectionMethods, auth=parse_json(AuthenticationDetails)
+| evaluate bag_unpack(auth)
+| where EmailDirection == "Inbound"
+| where DMARC == "fail"
