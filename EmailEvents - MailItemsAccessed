@@ -1,0 +1,4 @@
+// Basic check for finding items touched by MailItemsAccessed
+EmailEvents
+| where InternetMessageId contains "<InternetMessageId>"
+| project Timestamp, SenderFromAddress, RecipientEmailAddress, Subject, DeliveryAction, DeliveryLocation, AuthenticationDetails
