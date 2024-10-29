@@ -1,0 +1,8 @@
+// Check for email bombing, spam overload, too many emails.._
+// Define the list of subjects to filter - add as needed
+let subjList = dynamic(["Welcome", "activation", "giveaway", "your user name", "confirm", "subscribing", "newsletter", "verification", "verify", "subscription", "subscribed"]);
+// Filter EmailEvents based on the time generated and subject list
+EmailEvents
+| where TimeGenerated > ago(90d)
+| where Subject has_any (subjList)
+| project Timestamp, NetworkMessageId, InternetMessageId, SenderFromAddress, RecipientEmailAddress, Subject, DeliveryLocation, ThreatTypes, EmailAction, LatestDeliveryLocation, AuthenticationDetails
