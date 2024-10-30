@@ -3,5 +3,5 @@ EmailEvents
 | where SenderDisplayName contains "Dropbox"
 | where AttachmentCount > 0
 | join EmailAttachmentInfo on NetworkMessageId
-| where FileName matches regex @"[A-Z]{10}.pdf"
-| where EmailDirection == 'Inbound
+| where FileName matches regex @"\.pdf$"
+| where EmailDirection == 'Inbound'
